@@ -1,25 +1,28 @@
-import { ReadonlyURLSearchParams } from "next/navigation";
 import Movie from "../components/Movie";
-import { nameSearch } from "../api/dbSearch";
+import { actorSearch, nameSearch } from "../api/dbSearch";
 
-export async function fetchMovie(name: string) {
-    console.log(name)
-    const result = await nameSearch(name)
-
-    return result
-}
-
-export default async function SearchPage(searchParams: ReadonlyURLSearchParams) {
+export default async function SearchPage({searchParams}) {
     
-    var searchQuery = searchParams ? searchParams.q : null
+    var searchQuery = searchParams.q
 
     if (searchQuery == null) {
         searchQuery = " "
     }
 
-    const result = await nameSearch(searchQuery)
+    try {
+        const result = await nameSearch(searchQuery)
+        if(result) {
+            return (
+                <Movie movie={result} />
+    
+            )
+        } else {
+            return (
+                <h3>No Movie Found</h3>
+            )
+        }
+    } catch(err) {
+        console.log(err)
+    }
 
-    return (
-        <Movie movie = {result} />
-    )
 };
