@@ -1,5 +1,5 @@
-import Movie from "../components/Movie";
-import { actorSearch, nameSearch } from "../api/dbSearch";
+import { searchResults } from "../api/dbSearch";
+import Poster from "../components/Poster";
 
 export default async function SearchPage({searchParams}) {
     
@@ -10,10 +10,10 @@ export default async function SearchPage({searchParams}) {
     }
 
     try {
-        const result = await nameSearch(searchQuery)
+        const result = await searchResults(searchQuery)
         if(result) {
             return (
-                <Movie movie={result} />
+                <Poster movies={result} />
     
             )
         } else {

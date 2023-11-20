@@ -5,11 +5,10 @@ import Image from "next/image";
 export default function Actor({actor}) {
     return(
         <>
-            <ul>
+            <h1 className="text-2xl text-emerald-400 pb-10">{actor[0].actor}</h1>
+            <ul className="grid grid-cols-3 gap-4 items-start">
                 {actor.map(role =>(
                     <li key={role.movie}>
-                        <h3>{role.movie}</h3>
-                        <p>{role.name}</p>
                         <Image
                             src={role.poster}
                             width={300}

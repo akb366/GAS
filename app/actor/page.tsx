@@ -1,7 +1,7 @@
 import { actorSearch } from "../api/dbSearch";
-import Actor from "../components/Actor";
+import Poster from "../components/Poster";
 
-export default async function Home({searchParams}) {
+export default async function actorPage({searchParams}) {
 
     var search = searchParams.a
 
@@ -13,7 +13,10 @@ export default async function Home({searchParams}) {
         const result = await actorSearch(search)
         if(result) {
             return (
-                <Actor actor={result} />
+                <>
+                    <h1 className="text-2xl text-emerald-400 pb-10">{result[0].actor}</h1>
+                    <Poster movies={result} />
+                </>
     
             )
         } else {
